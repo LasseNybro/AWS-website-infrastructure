@@ -24,11 +24,13 @@ phases:
       - echo "Setting up AWS credentials..."
       - aws sts get-caller-identity
       - echo "Initializing Terraform..."
+      - cd infrastructure
       - terraform init -backend-config="bucket=${TF_STATE_BUCKET}" -backend-config="key=${TF_STATE_KEY}" -backend-config="region=${AWS_REGION}"
 
   build:
     commands:
       - echo "Running Terraform Plan..."
+      - cd infrastructure
       - terraform plan -out=tfplan
       - echo "Applying Terraform plan..."
       - terraform apply -auto-approve tfplan
@@ -36,6 +38,7 @@ phases:
   post_build:
     commands:
       - echo "Deployment complete!"
+      - cd infrastructure
       - terraform output
 
 artifacts:
