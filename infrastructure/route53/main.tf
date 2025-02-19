@@ -1,4 +1,4 @@
-resource "aws_route_53" "route_hosted_zone" {
+resource "aws_route53_zone" "route_hosted_zone" {
   name = var.domain_name
 }
 
