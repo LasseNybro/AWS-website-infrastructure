@@ -30,7 +30,6 @@ phases:
   build:
     commands:
       - echo "Running Terraform Plan..."
-      - cd infrastructure
       - terraform plan -out=tfplan
       - echo "Applying Terraform plan..."
       - terraform apply -auto-approve tfplan
@@ -38,7 +37,6 @@ phases:
   post_build:
     commands:
       - echo "Deployment complete!"
-      - cd infrastructure
       - terraform output
 
 artifacts:
