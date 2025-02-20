@@ -2,7 +2,7 @@ resource "aws_route53_zone" "route_hosted_zone_root" {
   name = var.domain_name
 }
 
-resource "aws_route53_record" "route_record" {
+resource "aws_route53_record" "route_record_root" {
   zone_id = aws_route53_zone.route_hosted_zone_root.zone_id
   name    = var.domain_name
   type    = "A"
@@ -17,7 +17,7 @@ resource "aws_route53_zone" "route_hosted_zone_www" {
   name = "www.${var.domain_name}"
 }
 
-resource "aws_route53_record" "route_record" {
+resource "aws_route53_record" "route_record_www" {
   zone_id = aws_route53_zone.route_hosted_zone_www.zone_id
   name    = var.domain_name
   type    = "A"
