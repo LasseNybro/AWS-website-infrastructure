@@ -19,7 +19,7 @@ resource "aws_route53_zone" "route_hosted_zone_www" {
 
 resource "aws_route53_record" "route_record_www" {
   zone_id = aws_route53_zone.route_hosted_zone_www.zone_id
-  name    = var.domain_name
+  name    = "www.${var.domain_name}"
   type    = "A"
   alias {
     name                   = var.s3_bucket_website_endpoint

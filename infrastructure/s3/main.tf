@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket" {
-  bucket = "lnybro-static-website-bucket"
+  bucket = "lnybro.dk"
 }
 
 resource "aws_s3_bucket_website_configuration" "bucket_website_configuration" {
