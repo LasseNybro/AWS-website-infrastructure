@@ -13,7 +13,7 @@ resource "aws_route53_record" "route_record_root" {
   }
 }
 
-resource "aws_route53_zone" "route_hosted_zone_www" {
+/*resource "aws_route53_zone" "route_hosted_zone_www" {
   name = "www.${var.domain_name}"
 }
 
@@ -26,7 +26,7 @@ resource "aws_route53_record" "route_record_www" {
     zone_id                = var.s3_bucket_hosted_zone_id
     evaluate_target_health = true
   }
-}
+}*/
 
 /*resource "aws_route53_zone" "route_hosted_zone" {
   name = "api.${var.domain_name}"
