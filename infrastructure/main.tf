@@ -16,7 +16,7 @@ module "route53" {
 
   domain_name                = "lnybro.dk"
   s3_bucket_hosted_zone_id   = module.static_website.hosted_zone_id
-  s3_bucket_website_endpoint = module.static_website.website_endpoint
+  s3_bucket_website_domain = module.static_website.website_domain
 }
 
 module "api_gateway" {

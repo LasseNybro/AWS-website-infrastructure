@@ -2,7 +2,7 @@ variable domain_name {
   type = string
 }
 
-variable s3_bucket_website_endpoint {
+variable s3_bucket_website_domain {
   type = string
 }
 
