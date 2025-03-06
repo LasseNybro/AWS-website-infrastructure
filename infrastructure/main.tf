@@ -29,10 +29,10 @@ module "api_gateway" {
 module "cloudfront" {
   source = "./cloudfront"
 
-  domain_name                            = module.route53.domain_name
-  s3_website_endpoint                    = module.static_website.website_endpoint
-  s3_bucket_id                           = module.static_website.s3_bucket_id
-  https_certificate_arn                  = module.route53.https_certificate_arn
+  domain_name           = module.route53.domain_name
+  s3_website_endpoint   = module.static_website.website_endpoint
+  s3_bucket_id          = module.static_website.s3_bucket_id
+  https_certificate_arn = module.route53.https_certificate_arn
 }
 
 module "route53_alias" {

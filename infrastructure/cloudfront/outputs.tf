@@ -1,7 +1,7 @@
-variable cloudfront_distribution_hosted_zone_id {
-  type = string
+output cloudfront_distribution_hosted_zone_id {
+  value = aws_cloudfront_distribution.distribution.hosted_zone_id
 }
 
-variable cloudfront_distribution_domain_name {
-  type = string
+output cloudfront_distribution_domain_name {
+  value = aws_cloudfront_distribution.distribution.domain_name
 }
