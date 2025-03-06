@@ -7,14 +7,20 @@ terraform {
   }
 }
 
+locals {
+  domain_name = "lnybro.dk"
+}
+
 module "static_website" {
   source = "./s3"
+
+  domain_name = local.domain_name
 }
 
 module "route53" {
   source = "./route53"
 
-  domain_name                            = "lnybro.dk"
+  domain_name                            = local.domain_name
   cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_domain_name
   cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_hosted_zone_id
 }
@@ -29,7 +35,7 @@ module "api_gateway" {
 module "cloudfront" {
   source = "./cloudfront"
 
-  domain_name           = module.route53.domain_name
+  domain_name           = local.domain_name
   s3_website_endpoint   = module.static_website.website_endpoint
   s3_bucket_id          = module.static_website.s3_bucket_id
   https_certificate_arn = module.route53.https_certificate_arn
@@ -38,7 +44,7 @@ module "cloudfront" {
 module "route53_alias" {
   source = "./route53-alias"
 
-  domain_name                            = module.route53.domain_name
+  domain_name                            = local.domain_name
   route53_zone_id                        = module.route53.route_hosted_zone_root.zone_id
   cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_distribution_domain_name
   cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id

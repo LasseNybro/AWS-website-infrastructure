@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket" {
-  bucket = "lnybro.dk"
+  bucket = var.domain_name
 }
 
 resource "aws_s3_bucket_website_configuration" "bucket_website_configuration" {
