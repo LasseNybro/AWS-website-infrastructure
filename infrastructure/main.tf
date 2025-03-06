@@ -33,8 +33,6 @@ module "cloudfront" {
   s3_website_endpoint                    = module.static_website.website_endpoint
   s3_bucket_id                           = module.static_website.s3_bucket_id
   https_certificate_arn                  = module.route53.https_certificate_arn
-  cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_domain_name
-  cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_hosted_zone_id
 }
 
 module "route53_alias" {
@@ -42,6 +40,6 @@ module "route53_alias" {
 
   domain_name                            = module.route53.domain_name
   route53_zone_id                        = module.route53.route_hosted_zone_root.zone_id
-  cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_domain_name
-  cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_hosted_zone_id
+  cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_distribution_domain_name
+  cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
 }
