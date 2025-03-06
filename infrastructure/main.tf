@@ -43,7 +43,7 @@ module "cloudfront" {
   domain_name           = local.domain_name
   s3_website_endpoint   = module.static_website.website_endpoint
   s3_bucket_id          = module.static_website.s3_bucket_id
-  https_certificate_arn = module.route53.https_certificate_arn
+  https_certificate_arn = module.https_certificate.lnybro_cert.arn
 }
 
 module "route53_alias" {
