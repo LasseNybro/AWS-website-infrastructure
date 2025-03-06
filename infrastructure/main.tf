@@ -17,10 +17,17 @@ module "static_website" {
   domain_name = local.domain_name
 }
 
+module "https_certificate" {
+  source = "./https-cert"
+
+  domain_name = local.domain_name
+}
+
 module "route53" {
   source = "./route53"
 
   domain_name = local.domain_name
+  lnybro_cert = module.https_certificate.lnybro_cert
 }
 
 module "api_gateway" {
@@ -32,9 +39,6 @@ module "api_gateway" {
 
 module "cloudfront" {
   source = "./cloudfront"
-  providers = {
-    aws = aws.us_east_1
-  }
 
   domain_name           = local.domain_name
   s3_website_endpoint   = module.static_website.website_endpoint
