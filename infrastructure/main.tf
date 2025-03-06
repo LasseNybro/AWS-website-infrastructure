@@ -14,9 +14,9 @@ module "static_website" {
 module "route53" {
   source = "./route53"
 
-  domain_name                = "lnybro.dk"
-  s3_bucket_hosted_zone_id   = module.static_website.hosted_zone_id
-  s3_bucket_website_domain = module.static_website.website_domain
+  domain_name                            = "lnybro.dk"
+  cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_domain_name
+  cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_hosted_zone_id
 }
 
 module "api_gateway" {
@@ -24,4 +24,24 @@ module "api_gateway" {
 
   # get_lambda_invoke_arn   = 
   # post_lambda_invokde_arn = 
+}
+
+module "cloudfront" {
+  source = "./cloudfront"
+
+  domain_name                            = module.route53.domain_name
+  s3_website_endpoint                    = module.static_website.website_endpoint
+  s3_bucket_id                           = module.static_website.s3_bucket_id
+  https_certificate_arn                  = module.route53.https_certificate_arn
+  cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_domain_name
+  cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_hosted_zone_id
+}
+
+module "route53_alias" {
+  source = "./route53-alias"
+
+  domain_name                            = module.route53.domain_name
+  route53_zone_id                        = module.route53.route_hosted_zone_root.zone_id
+  cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_domain_name
+  cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_hosted_zone_id
 }

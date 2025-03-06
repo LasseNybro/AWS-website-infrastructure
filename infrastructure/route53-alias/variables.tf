@@ -9,3 +9,7 @@ variable cloudfront_distribution_domain_name {
 variable cloudfront_distribution_hosted_zone_id {
   type = string
 }
+
+variable "route53_zone_id" {
+  type = string
+}
