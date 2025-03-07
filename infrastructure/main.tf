@@ -17,18 +17,10 @@ module "static_website" {
   domain_name = local.domain_name
 }
 
-module "https_certificate" {
-  source = "./https-cert"
-
-  domain_name = local.domain_name
-}
-
-module "route53" {
-  source = "./route53"
+module "route53_cert" {
+  source = "./route53-cert"
 
   domain_name               = local.domain_name
-  domain_validation_options = module.https_certificate.lnybro_cert.domain_validation_options
-  lnybro_cert_arn           = module.https_certificate.lnybro_cert.arn
 }
 
 module "api_gateway" {
@@ -44,7 +36,7 @@ module "cloudfront" {
   domain_name           = local.domain_name
   s3_website_endpoint   = module.static_website.website_endpoint
   s3_bucket_id          = module.static_website.s3_bucket_id
-  https_certificate_arn = module.https_certificate.lnybro_cert.arn
+  https_certificate_arn = module.route53_cert.lnybro_cert_arn
 }
 
 module "route53_alias" {
