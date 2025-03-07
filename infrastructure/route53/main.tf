@@ -4,7 +4,7 @@ resource "aws_route53_zone" "route_hosted_zone_root" {
 
 resource "aws_route53_record" "cert_validation" {
   for_each = {
-    for dvo in var.lnybro_cert.domain_validation_options : dvo.domain_name => {
+    for dvo in var.domain_validation_options : dvo.domain_name => {
       name  = dvo.resource_record_name
       type  = dvo.resource_record_type
       value = dvo.resource_record_value
