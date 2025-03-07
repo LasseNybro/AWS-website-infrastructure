@@ -20,7 +20,7 @@ module "static_website" {
 module "route53_cert" {
   source = "./route53-cert"
 
-  domain_name               = local.domain_name
+  domain_name = local.domain_name
 }
 
 module "api_gateway" {
@@ -43,7 +43,7 @@ module "route53_alias" {
   source = "./route53-alias"
 
   domain_name                            = local.domain_name
-  route53_zone_id                        = module.route53.route53_zone_id
+  route53_zone_id                        = module.route53_cert.route53_zone_id
   cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_distribution_domain_name
   cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
 }
