@@ -9,3 +9,7 @@ variable "domain_validation_options" {
       resource_record_value = string
   }))
 }
+
+variable lnybro_cert_arn {
+  type = string
+}
