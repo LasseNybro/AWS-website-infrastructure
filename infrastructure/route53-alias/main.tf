@@ -1,3 +1,7 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
 resource "aws_route53_record" "route_record_root" {
   zone_id = var.route53_zone_id
   name    = var.domain_name

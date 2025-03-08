@@ -1,5 +1,8 @@
+provider "aws" {
+  region = "us-east-1"
+}
+
 data "aws_acm_certificate" "lnybro_cert" {
-  provider = aws.us_east_1
   domain   = var.domain_name
   statuses = ["ISSUED"]
 }
