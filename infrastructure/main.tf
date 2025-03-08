@@ -13,18 +13,27 @@ locals {
 
 module "static_website" {
   source = "./s3"
+  providers = {
+    aws = aws.eu_north_1
+  }
 
   domain_name = local.domain_name
 }
 
 module "https_cert" {
   source = "./https-cert"
+  providers = {
+    aws = aws.us_east_1
+  }
 
   domain_name = local.domain_name
 }
 
 module "route53" {
   source = "./route53"
+  providers = {
+    aws = aws.eu_north_1
+  }
 
   domain_name     = local.domain_name
   lnybro_cert_arn = module.https_cert.lnybro_cert_arn
@@ -33,6 +42,9 @@ module "route53" {
 
 module "api_gateway" {
   source = "./api-gateway"
+  providers = {
+    aws = aws.eu_north_1
+  }
 
   # get_lambda_invoke_arn   = 
   # post_lambda_invokde_arn = 
@@ -40,6 +52,9 @@ module "api_gateway" {
 
 module "cloudfront" {
   source = "./cloudfront"
+  providers = {
+    aws = aws.eu_north_1
+  }
 
   domain_name           = local.domain_name
   s3_website_endpoint   = module.static_website.website_endpoint
@@ -50,6 +65,9 @@ module "cloudfront" {
 
 module "route53_alias" {
   source = "./route53-alias"
+  providers = {
+    aws = aws.eu_north_1
+  }
 
   domain_name                            = local.domain_name
   route53_zone_id                        = module.route53.route53_zone_id
