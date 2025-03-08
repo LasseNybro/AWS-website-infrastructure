@@ -44,8 +44,6 @@ module "route53" {
   }
 
   domain_name                            = local.domain_name
-  cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_distribution_domain_name
-  cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
 }
 
 module "api_gateway" {
@@ -69,4 +67,16 @@ module "cloudfront" {
   s3_bucket_id          = module.static_website.s3_bucket_id
   https_certificate_arn = module.route53.https_cert_arn
   depends_on            = [module.route53]
+}
+
+module "route53_alias" {
+  source = "./route53-alias"
+  providers = {
+    aws = aws.us_east_1
+  }
+
+  domain_name                            = local.domain_name
+  s3_bucket_hosted_zone_id               = module.static_website.s3_bucket_hosted_zone_id
+  cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_distribution_domain_name
+  cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
 }
