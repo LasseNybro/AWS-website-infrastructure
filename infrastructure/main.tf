@@ -15,6 +15,7 @@ terraform {
 }
 
 provider "aws" {
+  alias  = "eu_north_1"
   region = "eu-north-1"
 }
 
@@ -30,7 +31,7 @@ locals {
 module "static_website" {
   source = "./s3"
   providers = {
-    aws = aws
+    aws = aws.eu_north_1
   }
 
   domain_name = local.domain_name
@@ -61,7 +62,7 @@ module "route53" {
 module "api_gateway" {
   source = "./api-gateway"
   providers = {
-    aws = aws
+    aws = aws.eu_north_1
   }
 
   # get_lambda_invoke_arn   = 
