@@ -9,7 +9,3 @@ output website_endpoint {
 output s3_bucket_id {
   value = aws_s3_bucket.bucket.id
 }
-
-output "lnybro_cert_arn" {
-  value = module.https_cert.lnybro_cert.arn
-}

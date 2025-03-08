@@ -46,7 +46,6 @@ module "route53" {
   domain_name                            = local.domain_name
   cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_distribution_domain_name
   cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
-  depends_on                             = [module.https_cert]
 }
 
 module "api_gateway" {
@@ -69,5 +68,5 @@ module "cloudfront" {
   s3_website_endpoint   = module.static_website.website_endpoint
   s3_bucket_id          = module.static_website.s3_bucket_id
   https_certificate_arn = module.route53.https_cert_arn
-  depends_on            = [module.https_cert]
+  depends_on            = [module.route53]
 }
