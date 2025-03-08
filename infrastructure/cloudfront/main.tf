@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
 resource "aws_cloudfront_distribution" "website_cdn" {
   origin {
     domain_name = var.s3_website_endpoint

@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
 resource "aws_apigatewayv2_api" "api" {
   name          = "http-api-gateway"
   protocol_type = "HTTP"
