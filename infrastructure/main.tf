@@ -76,7 +76,7 @@ module "route53_alias" {
   }
 
   domain_name                            = local.domain_name
-  s3_bucket_hosted_zone_id               = module.static_website.s3_bucket_hosted_zone_id
+  route53_zone_id                        = module.route53.route53_zone_id
   cloudfront_distribution_domain_name    = module.cloudfront.cloudfront_distribution_domain_name
   cloudfront_distribution_hosted_zone_id = module.cloudfront.cloudfront_distribution_hosted_zone_id
 }

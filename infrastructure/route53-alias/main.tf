@@ -1,5 +1,5 @@
 resource "aws_route53_record" "route_record_root" {
-  zone_id = var.s3_bucket_hosted_zone_id
+  zone_id = var.route53_zone_id
   name    = var.domain_name
   type    = "A"
   alias {
@@ -10,7 +10,7 @@ resource "aws_route53_record" "route_record_root" {
 }
 
 resource "aws_route53_record" "route_record_www" {
-  zone_id = var.s3_bucket_hosted_zone_id
+  zone_id = var.route53_zone_id
   name    = "www.${var.domain_name}"
   type    = "A"
   alias {

@@ -2,7 +2,7 @@ variable domain_name {
   type = string
 }
 
-variable s3_bucket_hosted_zone_id {
+variable route53_zone_id {
   type = string
 }
 
