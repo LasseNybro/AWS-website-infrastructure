@@ -17,10 +17,18 @@ module "static_website" {
   domain_name = local.domain_name
 }
 
-module "route53_cert" {
-  source = "./route53-cert"
+module "https_cert" {
+  source = "./https-cert"
 
   domain_name = local.domain_name
+}
+
+module "route53" {
+  source = "./route53"
+
+  domain_name = local.domain_name
+  lnybro_cert_arn = module.https_cert.lnybro_cert_arn
+  lnybro_cert = module.https_cert.lnybro_cert
 }
 
 module "api_gateway" {
