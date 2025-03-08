@@ -26,10 +26,9 @@ module "https_cert" {
 module "route53" {
   source = "./route53"
 
-  domain_name = local.domain_name
+  domain_name     = local.domain_name
   lnybro_cert_arn = module.https_cert.lnybro_cert_arn
-  lnybro_cert = tolist(flatten(module.https_cert.lnybro_cert.domain_validation_options))
-  depends_on = [module.https_cert]
+  depends_on      = [module.https_cert]
 }
 
 module "api_gateway" {
@@ -46,6 +45,7 @@ module "cloudfront" {
   s3_website_endpoint   = module.static_website.website_endpoint
   s3_bucket_id          = module.static_website.s3_bucket_id
   https_certificate_arn = module.https_cert.lnybro_cert_arn
+  depends_on            = [module.https_cert]
 }
 
 module "route53_alias" {
