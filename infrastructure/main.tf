@@ -19,6 +19,7 @@ module "static_website" {
 
 module "https_cert" {
   source = "./https-cert"
+  providers = aws.us_east_1
 
   domain_name = local.domain_name
 }
