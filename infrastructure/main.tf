@@ -28,7 +28,7 @@ module "route53" {
 
   domain_name = local.domain_name
   lnybro_cert_arn = module.https_cert.lnybro_cert_arn
-  lnybro_cert = module.https_cert.lnybro_cert
+  lnybro_cert = module.https_cert.lnybro_cert.domain_validation_options
 }
 
 module "api_gateway" {
